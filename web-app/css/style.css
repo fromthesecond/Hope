@@ -1,0 +1,15 @@
+body {
+
+    background-color: azure;
+}
+
+.checkLoginForm {
+
+    width: 30%;
+    margin-top: 10%
+}
+
+.checkHeadSignIn {
+
+    text-align: center;
+}
