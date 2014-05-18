@@ -80,7 +80,7 @@
             </div>
             <article class="grid_3">
                 <div class="box">
-                    <figure><a><img src="images/page1-img1.jpg" alt=""></a></figure>
+                    <figure></figure>
                     <div class="padding">
                         <strong class="title-3 color-1">Consulting</strong>
                         <a class="link">Experts from around the world</a>
@@ -89,7 +89,7 @@
             </article>
             <article class="grid_3">
                 <div class="box">
-                    <figure><a><img src="images/page1-img2.jpg" alt=""></a></figure>
+                    <figure></figure>
                     <div class="padding">
                         <strong class="title-3 color-2">Training</strong>
                         <a class="link">Prospective students of all universities of the city</a>
@@ -98,7 +98,7 @@
             </article>
             <article class="grid_3">
                 <div class="box">
-                    <figure><a><img src="images/page1-img3.jpg" alt=""></a></figure>
+                    <figure></figure>
                     <div class="padding">
                         <strong class="title-3 color-3">Analysis</strong>
                         <a class="link">Productivity of each employee</a>
@@ -107,7 +107,7 @@
             </article>
             <article class="grid_3">
                 <div class="box">
-                    <figure><a href="#"><img src="images/page1-img4.jpg" alt=""></a></figure>
+                    <figure></figure>
                     <div class="padding">
                         <strong class="title-3 color-4">Research</strong>
                         <a class="link">Business areas and places on the market</a>

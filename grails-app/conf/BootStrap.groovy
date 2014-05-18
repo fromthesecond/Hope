@@ -8,8 +8,12 @@ class BootStrap {
 
         def userRole = populateRole('ROLE_USER')
         def testUser = populateUser('John', 'password', userRole)
-        println('User with login '+ testUser.username + ' and role ' + testUser.role.authority + ' created')
+        def adminRole = populateRole('ROLE_ADMIN')
+        def testAdmin = populateUser('Jack', 'password', adminRole)
+
+        println('User with login '+ testUser.username + ' and role ' + testUser.role.authority + ' has been created')
         println(userRole.authority + userRole.id)
+        println('Admin with login '+ testAdmin.username + ' has been created' )
 
     }
     def destroy = {
