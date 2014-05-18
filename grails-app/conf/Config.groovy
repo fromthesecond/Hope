@@ -126,7 +126,7 @@ log4j = {
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'ua.ck.hope.User'
 grails.plugin.springsecurity.authority.className = 'ua.ck.hope.Role'
 grails.plugin.springsecurity.logout.postOnly = false
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/profile'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/index/check'
 grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
 grails.plugin.springsecurity.userLookup.usernamePropertyName = 'username' //TODO: switch back to email when time comes
 
@@ -135,7 +135,6 @@ grails.plugin.springsecurity.password.encodeHashAsBase64 = true
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 	'/':                              ['ROLE_USER'],
-    '/profile':                       ['ROLE_USER'],
 	'/**/js/**':                      ['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/**/css/**':                     ['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/**/images/**':                  ['IS_AUTHENTICATED_ANONYMOUSLY'],

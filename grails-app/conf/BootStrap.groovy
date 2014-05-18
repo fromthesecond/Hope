@@ -11,8 +11,7 @@ class BootStrap {
         def adminRole = populateRole('ROLE_ADMIN')
         def testAdmin = populateUser('Jack', 'password', adminRole)
 
-        println('User with login '+ testUser.username + ' and role ' + testUser.role.authority + ' has been created')
-        println(userRole.authority + userRole.id)
+        println('User with login '+ testUser.username + ' has been created')
         println('Admin with login '+ testAdmin.username + ' has been created' )
 
     }
