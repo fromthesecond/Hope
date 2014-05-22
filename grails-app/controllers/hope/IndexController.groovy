@@ -26,4 +26,9 @@ class IndexController {
             render 'Fatal Error with Sign In'
         }
     }
+
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def main () {
+        //println(springSecurityService.currentUser.role.authority)
+    }
 }

@@ -52,8 +52,8 @@
                             <ul class="menu">
                                 <li><a class="active">Main</a></li>
                                 <li><a>About</a></li>
-                                <li><a>Services</a></li>
-                                <li><g:link controller="login">Sign In</g:link></li>
+                                <li><g:link controller="index" action="main">Forum</g:link></li>
+                                <li><g:link controller="login" action="auth">Sign In</g:link></li>
                                 <li><g:link controller="signUp" action="signUp">Sign Up</g:link></li>
                             </ul>
                         </nav>

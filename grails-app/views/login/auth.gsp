@@ -32,8 +32,13 @@
 
 
     <div id = "error" class="error" hidden="true"><p>Error, check the number of characters!</p></div>
-    <input type="text" class = "form-control" name='j_username' id='username' placeholder="Username" required autofocus>
-    <input type="password"  class = "form-control" name='j_password' id='password' placeholder="Password" required>
+    <p>
+        <input type="text" class = "form-control" name='j_username' id='username' placeholder="Username" required autofocus>
+    </p>
+    <p>
+        <input type="password"  class = "form-control" name='j_password' id='password' placeholder="Password" required>
+    </p>
+
     <label class="checkbox">
         <p id="remember_me_holder">
             <input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me'
@@ -42,7 +47,8 @@
         </p>
     </label>
     <input type='submit' id="submit" class="btn btn-sm btn-primary btn-block"  value='${message(code: "springSecurity.login.button")}'/>
-    <g:link url="[action: 'signUp', controller: 'signUp']">Sign Up</g:link>
+<hr style="height: 2px; background-color: #444444 ">
+<p class="bg-danger">Do not have account? <g:link controller="signUp" action="signUp"><button type="button" class="btn btn-info btn-sm" value="Sign Up" >Sign Up</button></g:link></p>
 </form>
 </div>
 </body>
