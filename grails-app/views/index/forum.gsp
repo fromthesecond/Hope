@@ -40,6 +40,13 @@
         <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen">
 	<![endif]-->
 
+    <script>
+    $(document).ready(function () {
+        $.get('/index/getCurrentUsername', function (data) {
+            $('#user').html(data.username);
+        });
+    });
+    </script>
 </head>
 
 <body>
@@ -55,6 +62,8 @@
                         <li><g:link class="active" controller="index" action="main">Forum</g:link></li>
                         <li><g:link controller="login" action="auth">Sign In</g:link></li>
                         <li><g:link controller="signUp" action="signUp">Sign Up</g:link></li>
+                        <li>Logged as <div id="user"></div>  </li>
+                        <li><g:link controller="logout">Log Out</g:link></li>
                     </ul>
                 </nav>
             </div>

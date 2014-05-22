@@ -1,10 +1,12 @@
 package hope
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 
 class IndexController {
 
+    //static allowedMethods = [getCurrentUsername: "GET"]
     SpringSecurityService springSecurityService
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
@@ -28,7 +30,13 @@ class IndexController {
     }
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
-    def main () {
-        //println(springSecurityService.currentUser.role.authority)
+    def forum () {
+          //println(springSecurityService.currentUser.role.authority)
+    }
+
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def getCurrentUsername () {
+        def currentUser = springSecurityService.currentUser
+        render (currentUser as JSON)
     }
 }

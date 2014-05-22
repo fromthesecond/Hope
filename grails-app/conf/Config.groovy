@@ -126,7 +126,7 @@ log4j = {
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'ua.ck.hope.User'
 grails.plugin.springsecurity.authority.className = 'ua.ck.hope.Role'
 grails.plugin.springsecurity.logout.postOnly = false
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/index/main'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/index/forum'
 grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
 grails.plugin.springsecurity.userLookup.usernamePropertyName = 'username' //TODO: switch back to email when time comes
 
