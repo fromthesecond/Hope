@@ -8,14 +8,24 @@ class User {
     boolean passwordExpired = false
     String username
     String password
+    String firstName
+    String lastName
+    Date date
+    Integer karma
     Role role
 
+    //Comment comment
+    //Thread thread
     transient springSecurityService
-    static transients = ['springSecurityService']
 
+    static hasMany = [comment: Comment, thread: Thread]
     static constraints = {
         username(blank: false, unique: true)
         password(blank: false, nullable: false, size: 6..65)
+        firstName(nullable: true, size: 3..20)
+        lastName(nullable: true, size: 3..20)
+        karma(nullable: true)
+        date (nullable: false)
     }
 
     static mapping = {

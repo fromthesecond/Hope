@@ -60,8 +60,6 @@
                         <li><g:link controller="index" action="index">Main</g:link></li>
                         <li><a>About</a></li>
                         <li><g:link class="active" controller="index" action="main">Forum</g:link></li>
-                        <li><g:link controller="login" action="auth">Sign In</g:link></li>
-                        <li><g:link controller="signUp" action="signUp">Sign Up</g:link></li>
                         <li>Logged as <div id="user"></div>  </li>
                         <li><g:link controller="logout">Log Out</g:link></li>
                     </ul>
