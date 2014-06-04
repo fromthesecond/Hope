@@ -38,6 +38,12 @@ class IndexController {
     def topics () {
         [thread: Category.findById(params.id).getThreads()]
     }
+
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def showThread () {
+        [details: Thread.findById(params.id)]
+    }
+
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def getCurrentUsername () {
         def currentUser = springSecurityService.currentUser
