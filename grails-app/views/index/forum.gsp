@@ -87,5 +87,9 @@
     </div>
 </div>
 <!-- end head -->
+
+<g:each in="${category}">
+    <p><g:link controller="index" action="topics" id = "${it.id}">${it.name}</g:link> </p>
+</g:each>
 </body>
 </html>

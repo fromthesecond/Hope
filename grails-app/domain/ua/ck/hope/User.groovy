@@ -13,12 +13,10 @@ class User {
     Date date
     Integer karma
     Role role
-
-    //Comment comment
-    //Thread thread
     transient springSecurityService
 
-    static hasMany = [comment: Comment, thread: Thread]
+    static hasMany = [comments: Comment, threads: Thread]
+
     static constraints = {
         username(blank: false, unique: true)
         password(blank: false, nullable: false, size: 6..65)

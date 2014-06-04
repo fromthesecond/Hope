@@ -3,7 +3,7 @@ package hope
 import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
-
+import ua.ck.hope.*
 class IndexController {
 
     //static allowedMethods = [getCurrentUsername: "GET"]
@@ -31,9 +31,13 @@ class IndexController {
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def forum () {
-          //println(springSecurityService.currentUser.role.authority)
+        [category: Category.findAll()]
     }
 
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def topics () {
+        [thread: Category.findById(params.id).getThreads()]
+    }
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def getCurrentUsername () {
         def currentUser = springSecurityService.currentUser

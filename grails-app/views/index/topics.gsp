@@ -5,7 +5,9 @@
 </head>
 
 <body>
-<p>Admin page</p>
-<p><g:link controller="logout">Log Out</g:link> </p>
+<g:each in="${thread}">
+    <p>${it.title}</p>
+    <p>${it.author.username}</p>
+</g:each>
 </body>
 </html>
