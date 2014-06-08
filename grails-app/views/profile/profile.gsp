@@ -6,17 +6,45 @@
     <link rel="stylesheet" href="/css/example/style.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/css/example/grid.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/css/plugins/tabs.css" type="text/css"/>
-    <link rel="stylesheet" href="/css/plugins/MooEditable.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/plugins/jquery.cleditor.css" type="text/css"/>
 
     <g:javascript src="/jquery-1.11.0.min.js"/>
     <g:javascript src="/plugins/tabs.js"/>
+    <g:javascript src="/plugins/jquery.cleditor.js"/>
+    <g:javascript src="/plugins/jquery.cleditor.min.js"/>
+
     <script>
         $(document).ready(function () {
+            $("#input").cleditor();
             $.get('/index/getCurrentUsername', function (data) {
                 $('#user').html(data.username);
             });
         });
     </script>
+    <script>
+        function add () {
+            var json = {
+                title: $('#title').val(),
+                body: $('#input').val(),
+                keywords: $('#keywords').val()
+            }
+            $.post('/profile/addTopic', json, function (response) {
+                if (response.success) {
+                    alert('Success')
+                    window.location = '/login/auth';
+                } else {
+                    alert('Server Error. Try again later!')
+                }
+            });
+        }
+    </script>
+    <style>
+        input {
+            width: 600px;
+            padding: 4px;
+            margin: 4px;
+        }
+    </style>
 </head>
 <body>
 <div class="container_12">
@@ -42,16 +70,24 @@
 <div class="section">
 
     <ul class="tabs">
-        <li class="current">Первая вкладка</li>
-        <li>Вторая вкладка</li>
-        <li>Третья вкладка</li>
-        <li>Червертая вкладка</li>
+        <li class="current">Add Topic</li>
+        <li>Profile</li>
+        <li>Left Comments</li>
+        <li>Created Topics</li>
     </ul>
 
     <div class="box visible">
 
-
-
+            <input type="text" class="form-control" placeholder="Title" id = "title">
+            <abbr title="Use <code></code> to set code"><textarea id="input" name="input"></textarea></abbr>
+            <p>Use tags &lt;code&gt;  to set code</p>
+            Choose Category of topic: <select class="form-control">
+            <g:each in="${category}">
+                    <option>${it.name}</option>
+            </g:each>
+            </select>
+            <p><input type="text" placeholder="Keywords" id = "keywords"></p>
+            <p><button id = "add" onclick="add()">Add topic</button></p>
     </div>
 
     <div class="box">

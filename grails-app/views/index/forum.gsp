@@ -29,16 +29,6 @@
                     prev: '#prev'
                 });
     </script>
-    <!--[if lt IE 8]>
-    <div style=' clear: both; text-align:center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-        	<img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-        </a>
-    </div>
-
-   		<script type="text/javascript" src="js/html5.js"></script>
-        <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen">
-	<![endif]-->
 
     <script>
     $(document).ready(function () {
@@ -60,7 +50,7 @@
                         <li><g:link controller="index" action="index">Main</g:link></li>
                         <li><a>About</a></li>
                         <li><g:link class="active" controller="index" action="main">Forum</g:link></li>
-                        <li>Logged as <div id="user"></div>  </li>
+                        <li>Logged as <g:link controller="profile" action="profile"><div id="user"></div></g:link></li>
                         <li><g:link controller="logout">Log Out</g:link></li>
                     </ul>
                 </nav>
