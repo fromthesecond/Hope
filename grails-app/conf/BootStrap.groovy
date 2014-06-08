@@ -14,7 +14,11 @@ class BootStrap {
 
         def javaCategory = new Category(name: 'Questions about Java')
         def grailsCategory = new Category(name: 'Questions about Grails')
+        def jsCategory = new Category(name: 'Questions about JavaScript/JQuery')
+        def other = new Category(name: 'Other Questions')
 
+        jsCategory.save(flush: true)
+        other.save(flush: true)
         grailsCategory.save(flush: true)
         javaCategory.save(flush: true)
 

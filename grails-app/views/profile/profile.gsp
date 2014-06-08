@@ -12,12 +12,14 @@
     <g:javascript src="/plugins/tabs.js"/>
     <g:javascript src="/plugins/jquery.cleditor.js"/>
     <g:javascript src="/plugins/jquery.cleditor.min.js"/>
-
     <script>
         $(document).ready(function () {
             $("#input").cleditor();
             $.get('/index/getCurrentUsername', function (data) {
                 $('#user').html(data.username);
+            });
+            $.get('/profile/getUsers', function (data) {
+                alert(data.threads[0].title)
             });
         });
     </script>
@@ -26,16 +28,17 @@
             var json = {
                 title: $('#title').val(),
                 body: $('#input').val(),
-                keywords: $('#keywords').val()
-            }
-            $.post('/profile/addTopic', json, function (response) {
-                if (response.success) {
-                    alert('Success')
-                    window.location = '/login/auth';
-                } else {
-                    alert('Server Error. Try again later!')
-                }
-            });
+                keywords: $('#keywords').val(),
+                category: $('#option').val()
+            };
+                $.post('/profile/addTopic', json, function (response) {
+                    if (response.success) {
+                        alert('Success')
+                        window.location = '/login/auth';
+                    } else {
+                        alert('Server Error. Try again later!')
+                    }
+                });
         }
     </script>
     <style>
@@ -77,16 +80,15 @@
     </ul>
 
     <div class="box visible">
-
-            <input type="text" class="form-control" placeholder="Title" id = "title">
+            <input type="text" class="form-control" placeholder="Title" id = "title"  />
             <abbr title="Use <code></code> to set code"><textarea id="input" name="input"></textarea></abbr>
             <p>Use tags &lt;code&gt;  to set code</p>
             Choose Category of topic: <select class="form-control">
             <g:each in="${category}">
-                    <option>${it.name}</option>
+                    <option id="option">${it.name}</option>
             </g:each>
             </select>
-            <p><input type="text" placeholder="Keywords" id = "keywords"></p>
+            <p><input type="text" placeholder="Keywords" id = "keywords"  /></p>
             <p><button id = "add" onclick="add()">Add topic</button></p>
     </div>
 

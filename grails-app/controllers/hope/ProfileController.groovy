@@ -15,7 +15,14 @@ class ProfileController {
     }
 
     def getUsers() {
-        render (User.findAll() as JSON)
+        def current = springSecurityService.currentUser
+        def user = User.find(springSecurityService.currentUser)
+        def info = [
+          'user': user,
+          'comments': user.getComments(),
+          'threads': user.getThreads()
+        ]
+        render (info as JSON)
     }
     def addTopic () {
         def thread = new Thread(
@@ -25,7 +32,7 @@ class ProfileController {
                 rating: 0,
                 keywords: params.keywords,
                 author: springSecurityService.currentUser,
-                category: Category.findById(1)
+                category: params.category
         )
         thread.validate()
         thread.save(flush: true)
