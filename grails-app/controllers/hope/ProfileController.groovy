@@ -11,7 +11,7 @@ class ProfileController {
     SpringSecurityService springSecurityService
     static allowedMethods = [addTopic: "POST"]
     def profile() {
-        [category: Category.findAll()]
+        [category: Category.findAll(), userThreads: User.find(springSecurityService.currentUser).getThreads(), userComments: User.find(springSecurityService.currentUser).getComments()]
     }
 
     def getUsers() {
@@ -32,10 +32,13 @@ class ProfileController {
                 rating: 0,
                 keywords: params.keywords,
                 author: springSecurityService.currentUser,
-                category: params.category
+                category: Category.findByName(params.category)
         )
-        thread.validate()
-        thread.save(flush: true)
-        render ([success: true] as JSON)
+        if (thread.validate()) {
+            thread.save(flush: true)
+            render ([success: true] as JSON)
+        } else {
+            render ([success: false] as JSON)
+        }
     }
 }

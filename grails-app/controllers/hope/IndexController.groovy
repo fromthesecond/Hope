@@ -6,7 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import ua.ck.hope.*
 class IndexController {
 
-    //static allowedMethods = [getCurrentUsername: "GET"]
+    static allowedMethods = [addComment: "POST"]
     SpringSecurityService springSecurityService
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
@@ -41,12 +41,26 @@ class IndexController {
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def showThread () {
-        [details: Thread.findById(params.id)]
+        [details: Thread.findById(params.id), comment: Thread.findById(params.id).getComments()]
     }
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def getCurrentUsername () {
         def currentUser = springSecurityService.currentUser
         render (currentUser as JSON)
+    }
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def addComment () {
+        def comment = new Comment(
+             body: params.body,
+             date: new Date(),
+             author: User.find(springSecurityService.currentUser),
+             threads: Thread.findById(params.idThread)
+        ).save(flush: true)
+        if (comment.validate()) {
+            render([success: true] as JSON)
+        } else {
+            render ([success: false] as JSON)
+        }
     }
 }

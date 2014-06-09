@@ -56,10 +56,10 @@ class BootStrap {
                     username: username,
                     password: password,
                     role: role,
-                    date: date
+                    date: date,
+                    karma: 100
             )
             user.save(flush: true, failOnError: true)
-
         }
         return user
     }

@@ -28,20 +28,31 @@
             border-style: groove;
             border-color: mediumaquamarine;
             background: gainsboro;
-            padding-left: 15%;
             padding-right: 15%;
-            margin: 20px;
             width: 81%;
             position: relative;
             left: 8%;
             background: honeydew;
         }
-
         .addComment {
             border: 8px;
-
         }
     </style>
+    <script>
+        function addComment (){
+            var json = {
+                body: $('#comment').val(),
+                idThread: ${details.id}
+            }
+            $.post('/index/addComment', json ,function (response) {
+                if (response.success) {
+                    window.location = '/index/showThread/${details.id}';
+                } else {
+                    alert('All bad')
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -54,16 +65,24 @@
     <pre class="prettyprint">
         ${details.body}
     </pre>
+
     <hr>
 </div>
 <h1 class="h1">Comments</h1>
-<div class="commentBox">
-aslls
-</div>
+
+<g:each in="${comment}">
+    <div class="commentBox">
+    <kbd>Author: ${it.author.username}</kbd>
+    <p>Leaved: ${it.date}</p>
+    <p>${it.body}</p>
+    </div>
+</g:each>
+
 
 <hr>
 <div class="addComment">
-    <textarea class="form-control" rows="3"></textarea>
+    <textarea class="form-control" rows="3" id = "comment"></textarea>
+    <button class="btn-sm btn-info" id ="add" onclick="addComment()">Add Comment</button>
 </div>
 </body>
 </html>
