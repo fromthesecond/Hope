@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<html>
-<head>
     <title>Profile</title>
     <link rel = "stylesheet" href="/css/example/reset.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="/css/example/style.css" type="text/css" media="screen">
@@ -15,6 +13,8 @@
     <script>
         $(document).ready(function () {
             $("#input").cleditor();
+            $('#deleted').hide(true)
+            $('#cant').hide(true)
             $.get('/index/getCurrentUsername', function (data) {
                 $('#user').html(data.username);
             });
@@ -37,6 +37,20 @@
                     }
                 });
         }
+
+        function deleteTopic (idTopic) {
+            var id = {
+                id : idTopic
+            }
+            $.post('/profile/delTopic', id, function (response) {
+                if (response.success) {
+                    $('#deleted').show(true).fadeIn(4000).fadeOut(4000)
+                    $('#button').prop('disabled', true)
+                } else {
+                    $('#cant').show(true).fadeIn(4000).fadeOut(4000)
+                }
+            });
+        }
     </script>
     <style>
         input {
@@ -44,9 +58,17 @@
             padding: 4px;
             margin: 4px;
         }
+        #cant {
+            color: coral;
+            font-size: 20px;
+        }
+        #deleted {
+            color: #bce8f1;
+            font-size: 20px;
+        }
     </style>
-</head>
-<body>
+
+
 <div class="container_12">
     <div class="wrapper p3">
         <div class="grid_12">
@@ -79,12 +101,13 @@
     <div class="box visible">
             <input type="text" class="form-control" placeholder="Title" id = "title"  />
             <abbr title="Use <code></code> to set code"><textarea id="input" name="input"></textarea></abbr>
-            <p>Use tags &lt;code&gt;  to set code</p>
+            <p>Use tags &lt;pre&gt;  to set code</p>
             Choose Category of topic: <select class="form-control">
             <g:each in="${category}">
                     <option id="option">${it.name}</option>
             </g:each>
             </select>
+
             <p><input type="text" placeholder="Keywords" id = "keywords"  /></p>
             <p><button id = "add" onclick="add()">Add topic</button></p>
     </div>
@@ -104,11 +127,12 @@
 
     <div class="box">
         <g:each in="${userThreads}">
-            <p>Title: ${it.title}</p>
-            <p>Created: ${it.date}</p>
-            <p><g:link controller="index" action="showThread" id="${it.id}">To ${it.title}</g:link> </p>
+                <p>Title: ${it.title}</p>
+                <p>Created: ${it.date}</p>
+                <p><g:link controller="index" action="showThread" id="${it.id}">To ${it.title}</g:link> </p>
+                <p><button id = "button" onclick="deleteTopic(${it.id})">Delete Topic</button> </p>
         </g:each>
+        <div id="deleted">This topic has been deleted!</div>
+        <div id="cant">Cannot delete this topic. Try again later!</div>
     </div>
 </div>
-</body>
-</html>

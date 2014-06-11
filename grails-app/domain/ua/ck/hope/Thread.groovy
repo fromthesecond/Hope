@@ -13,7 +13,7 @@ class Thread {
     static hasMany = [comments: Comment]
     static constraints = {
         title (nullable: false, size: 3..150)
-        body (nullable: false, size: 3..10000)
+        body (nullable: false, size: 3..40000)
         author(nullable: false)
         category(nullable: false)
         rating (nullable: true, size: -1000..1000)

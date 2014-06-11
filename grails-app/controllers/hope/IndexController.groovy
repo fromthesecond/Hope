@@ -7,6 +7,7 @@ import ua.ck.hope.*
 class IndexController {
 
     static allowedMethods = [addComment: "POST"]
+    def current
     SpringSecurityService springSecurityService
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
@@ -41,7 +42,15 @@ class IndexController {
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def showThread () {
-        [details: Thread.findById(params.id), comment: Thread.findById(params.id).getComments()]
+        current = params.id
+        [details: Thread.findById(params.id),
+         comment: Thread.findById(params.id).getComments(),
+         current: springSecurityService.currentUser]
+    }
+
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def comments (){
+        render ([Thread.findById(current).getComments()])
     }
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
@@ -56,8 +65,9 @@ class IndexController {
              date: new Date(),
              author: User.find(springSecurityService.currentUser),
              threads: Thread.findById(params.idThread)
-        ).save(flush: true)
+        )
         if (comment.validate()) {
+            comment.save(flush: true, failOnError: true)
             render([success: true] as JSON)
         } else {
             render ([success: false] as JSON)

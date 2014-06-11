@@ -9,11 +9,25 @@ import ua.ck.hope.*
 class ProfileController {
 
     SpringSecurityService springSecurityService
-    static allowedMethods = [addTopic: "POST"]
+    static allowedMethods = [addTopic: "POST", delComment: 'POST', delTopic: "POST"]
     def profile() {
         [category: Category.findAll(), userThreads: User.find(springSecurityService.currentUser).getThreads(), userComments: User.find(springSecurityService.currentUser).getComments()]
     }
 
+    def delComment () {
+
+    }
+    def delTopic () {
+        println(params.id)
+        Thread thread = Thread.findById(params.id)
+        println(thread.title)
+        if (thread) {
+            thread.delete(flush: true)
+            render ([success: true] as JSON)
+        } else {
+            render ([success: false] as JSON)
+        }
+    }
     def getUsers() {
         def current = springSecurityService.currentUser
         def user = User.find(springSecurityService.currentUser)
