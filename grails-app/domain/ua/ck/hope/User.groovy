@@ -18,7 +18,7 @@ class User {
     static hasMany = [comments: Comment, threads: Thread]
 
     static constraints = {
-        username(blank: false, unique: true)
+        username(blank: false, unique: true, size: 4..15)
         password(blank: false, nullable: false, size: 6..65)
         firstName(nullable: true, size: 3..20)
         lastName(nullable: true, size: 3..20)

@@ -37,9 +37,18 @@
         });
     });
     </script>
+
+    <style>
+        .div {
+            border: 4px double #1e347b;
+            padding: 4px 4px 4px 80px;
+            margin: 4px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 
-<body>
+<body link="#dc143c">
 <div class="container_12">
     <div class="wrapper p3">
         <div class="grid_12">
@@ -79,7 +88,7 @@
 <!-- end head -->
 
 <g:each in="${category}">
-    <p><g:link controller="index" action="topics" id = "${it.id}">${it.name}</g:link> </p>
+    <div class="div"><g:link controller="index" action="topics" id = "${it.id}">${it.name}</g:link> </div>
 </g:each>
 </body>
 </html>

@@ -8,17 +8,27 @@ import ua.ck.hope.*
 @Secured(['ROLE_USER'])
 class ProfileController {
 
-    SpringSecurityService springSecurityService
-    static allowedMethods = [addTopic: "POST", delComment: 'POST', delTopic: "POST"]
+    static SpringSecurityService springSecurityService
+    static allowedMethods = [addTopic: "POST", delTopic: "POST"]
     def profile() {
-        [category: Category.findAll(), userThreads: User.find(springSecurityService.currentUser).getThreads(), userComments: User.find(springSecurityService.currentUser).getComments()]
+        [details: User.find(springSecurityService.currentUser),
+         category: Category.findAll(),
+         userThreads: User.find(springSecurityService.currentUser).getThreads(),
+         userComments: User.find(springSecurityService.currentUser).getComments()]
     }
 
     def delComment () {
+        println(params.id)
+        Comment comment = Comment.findById(params.id)
+        if (comment) {
+            comment.delete(flush: true)
+            redirect(action: "profile")
+        } else {
+            println('Server Error')
+        }
 
     }
     def delTopic () {
-        println(params.id)
         Thread thread = Thread.findById(params.id)
         println(thread.title)
         if (thread) {
@@ -36,7 +46,32 @@ class ProfileController {
           'comments': user.getComments(),
           'threads': user.getThreads()
         ]
-        render (info as JSON)
+        render (user as JSON)
+    }
+
+    def setUsername () {
+        def current = springSecurityService.currentUser
+        def user = User.find(current)
+        user.setUsername(params.username)
+        user.save(flush: true)
+        user.validate()
+        if (!user.hasErrors()) {
+            render ([success: true] as JSON)
+        } else {
+            render ([success: false] as JSON)
+        }
+    }
+    def updateFirstName () {
+        def user = User.find(springSecurityService.currentUser)
+        user.setFirstName(params.first)
+        user.save(flush: true)
+        user.validate()
+        if (!user.hasErrors()) {
+            render ([success: true] as JSON)
+        } else {
+            render ([success: false] as JSON)
+        }
+
     }
     def addTopic () {
         def thread = new Thread(
