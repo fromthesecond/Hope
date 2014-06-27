@@ -16,7 +16,6 @@ class User {
     transient springSecurityService
 
     static hasMany = [comments: Comment, threads: Thread]
-
     static constraints = {
         username(blank: false, unique: true, size: 4..15)
         password(blank: false, nullable: false, size: 6..65)

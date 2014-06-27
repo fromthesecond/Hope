@@ -17,17 +17,19 @@ class ProfileController {
          userComments: User.find(springSecurityService.currentUser).getComments()]
     }
 
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def delComment () {
         println(params.id)
         Comment comment = Comment.findById(params.id)
         if (comment) {
             comment.delete(flush: true)
-            redirect(action: "profile")
+            redirect(controller: "index", action: 'forum')
         } else {
             println('Server Error')
         }
 
     }
+
     def delTopic () {
         Thread thread = Thread.findById(params.id)
         println(thread.title)

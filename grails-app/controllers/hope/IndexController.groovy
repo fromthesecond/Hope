@@ -11,7 +11,9 @@ class IndexController {
     SpringSecurityService springSecurityService
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def index() {}
+    def index() {
+
+    }
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def check() {
@@ -21,7 +23,7 @@ class IndexController {
         def current = springSecurityService.currentUser
         def role = current.role.authority
 
-        if (role.equals(roleUser)) {
+         if (role.equals(roleUser)) {
             redirect(controller: "profile", action: "profile")
         } else if (role.equals(roleAdmin)) {
             redirect(controller: 'admin', action: 'index')
@@ -32,7 +34,11 @@ class IndexController {
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def forum () {
-        [category: Category.findAll()]
+        def random = [(Thread.findById(new Random().nextInt(1)+1)),
+                      (Thread.findById(new Random().nextInt(1)+1)),
+                      (Thread.findById(new Random().nextInt(1)+1)),
+                      (Thread.findById(new Random().nextInt(1)+1)),]
+        [category: Category.findAll(), random: random, admin: User.find(springSecurityService.currentUser)]
     }
 
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
@@ -72,5 +78,9 @@ class IndexController {
         } else {
             render ([success: false] as JSON)
         }
+    }
+
+    def search () {
+
     }
 }

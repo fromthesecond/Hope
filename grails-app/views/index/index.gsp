@@ -119,6 +119,7 @@
     </header>
 
     <!--==============================content================================-->
+    <input type="text" style="width: 400px; height: 20px" placeholder="Search Topics">
     <section id="content"><div class="ic"></div>
         <div class="container_12">
             <div class="wrapper">

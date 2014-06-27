@@ -37,38 +37,26 @@
     </div>
 </div>
 
-
-<div class="section">
-
-    <ul class="tabs">
-        <li class="current">Users List</li>
-        <li>Topics List</li>
-        <li>Comments List</li>
-    </ul>
-
-    <div class="box visible">
-       <g:each in="${users}">
-           <g:link controller="admin" action="user" id="${it.id}"><p>${it.username}</p></g:link>
-           <p>.........................................</p>
-       </g:each>
-    </div>
-
-    <div class="box">
-        <g:each in="${topics}">
-            <p>Title: ${it.title}</p>
-            <p>Author: ${it.author}</p>
-            <p>Category: ${it.category}</p>
-            <p>Left: ${it.date}</p>
-            <g:link controller="admin" action="delTopic" id = "${it.id}">Delete topic</g:link>
-        </g:each>
-    </div>
-
-    <div class="box">
-      <g:each in="${comments}">
-          <p>${it.author}</p>
-          <textarea>${it.body}</textarea>
-          <g:link controller="admin" action="delComment" id="${it.id}">Delete Comment</g:link>
-      </g:each>
-    </div>
-
-</div>
+<h2>User Details</h2>
+<hr>
+<g:each in="${user}">
+    <p>ID in system: ${it.id}</p>
+    <p>Username: ${it.username}</p>
+    <p>First Name: ${it.firstName}</p>
+    <p>Last Name: ${it.lastName}</p>
+    <p>Redistered Date: ${it.date}</p>
+    <p>Role in System: ${it.role.authority}</p>
+    <p><g:link controller="admin" action="changeRole" id="${it.id}">Change role</g:link></p>
+    <g:if test="${it.comments.empty}">
+        <p>Comments: ${it.username} hasnt comments!</p>
+    </g:if>
+    <g:else>
+        <div style="border: 2px solid #bce8f1; width: 710px">
+        <div style="border: 4px solid burlywood; width: 700px;">
+            <p>${it.comments.iterator().next().body}</p>
+        </div>
+            <p>Left: ${it.comments.iterator().next().date}</p>
+            <g:link controller="profile" action="delComment" id="${it.comments.iterator().next().id}">Delete Comment</g:link>
+        </div>
+    </g:else>
+</g:each>

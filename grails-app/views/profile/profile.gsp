@@ -83,9 +83,6 @@
                 var ejs = new EJS({url: '/templates/user.ejs'}).render(it);
             });
         }
-        function updateUser () {
-
-        }
     </script>
     <script>
         function add () {
@@ -215,7 +212,6 @@
         <g:each in="${userComments}">
             <p>Topic: ${it.threads.title}</p>
             <p>Left: ${it.date}</p>
-            <p><textarea readonly>${it.body}</textarea></p>
             <p><g:link controller="index" action="showThread" id = "${it.threads.id}" >To Topic</g:link> </p>
             <p><g:link controller="profile" action="delComment" id="${it.id}">Delete Comment</g:link> </p>
             <br>

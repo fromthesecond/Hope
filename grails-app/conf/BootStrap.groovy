@@ -12,15 +12,12 @@ class BootStrap {
         def testUser = populateUser('John', 'password', userRole, new Date())
         def testAdmin = populateUser('Jack', 'password', adminRole, new Date())
 
-        def javaCategory = new Category(name: 'Questions about Java')
-        def grailsCategory = new Category(name: 'Questions about Grails')
-        def jsCategory = new Category(name: 'Questions about JavaScript/JQuery')
-        def other = new Category(name: 'Other Questions')
-
-        jsCategory.save(flush: true)
-        other.save(flush: true)
-        grailsCategory.save(flush: true)
-        javaCategory.save(flush: true)
+        new Category(name: 'Recent News').save(flush: true)
+        new Category(name: 'Questions about Java').save(flush: true)
+        new Category(name: 'Questions about Grails').save(flush: true)
+        new Category(name: 'Questions about JavaScript/JQuery').save(flush: true)
+        new Category(name: 'Question about other Frameworks').save(flush: true)
+        new Category(name: 'Other Questions').save(flush: true)
 
         def thread = new Thread(
                 title: 'Title of new Thread',

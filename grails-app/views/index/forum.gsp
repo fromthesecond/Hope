@@ -42,13 +42,29 @@
         .div {
             border: 4px double #1e347b;
             padding: 4px 4px 4px 80px;
-            margin: 4px;
+            margin-left: 90px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
             font-size: 18px;
+            font-family: Georgia;
+            font-style: italic;
+            color: brown;
         }
+        #random {
+            position: relative;
+            left: 50%;
+            border: 4px outset aqua;
+            width: 30%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            font-size: 14px;
+            font-family: Georgia;
+            font-style: italic;
+        }
+
     </style>
 </head>
 
-<body link="#dc143c">
+<body link="#dc143c" vlink="#cc242f">
 <div class="container_12">
     <div class="wrapper p3">
         <div class="grid_12">
@@ -59,7 +75,12 @@
                         <li><g:link controller="index" action="index">Main</g:link></li>
                         <li><a>About</a></li>
                         <li><g:link class="active" controller="index" action="main">Forum</g:link></li>
-                        <li>Logged as <g:link controller="profile" action="profile"><div id="user"></div></g:link></li>
+                        <g:if test="${admin.role.authority == 'ROLE_USER'}">
+                            <li>Logged as <g:link controller="profile" action="profile"><div id="user"></div></g:link></li>
+                        </g:if>
+                        <g:else>
+                            <li>Logged as <g:link controller="admin" action="index"><div id="user"></div></g:link></li>
+                        </g:else>
                         <li><g:link controller="logout">Log Out</g:link></li>
                     </ul>
                 </nav>
@@ -86,9 +107,25 @@
     </div>
 </div>
 <!-- end head -->
+<div id = "category">
+    <g:each in="${category}">
+        <div class="div"><g:link controller="index" action="topics" id = "${it.id}">${it.name}</g:link> </div>
+    </g:each>
+</div>
 
-<g:each in="${category}">
-    <div class="div"><g:link controller="index" action="topics" id = "${it.id}">${it.name}</g:link> </div>
-</g:each>
+
+<div id = "random">
+    <h2>Random Topics</h2>
+    <g:if test="${random.id.empty}">
+        <p>There are no Topics</p>
+    </g:if>
+    <g:else>
+        <g:each in="${random}">
+            <p>${it.title}</p>
+        </g:each>
+    </g:else>
+</div>
+
+
 </body>
 </html>
